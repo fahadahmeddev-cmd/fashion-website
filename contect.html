@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-pink: #ffb3d9;
+            --soft-pink: #ffe5f0;
+            --dark-pink: #ff6ba8;
+            --black: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--black);
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--white) 100%);
+        }
+
+       
+        .navbar {
+            background: linear-gradient(135deg, var(--white) 0%, var(--soft-pink) 100%);
+            box-shadow: 0 2px 15px rgba(255, 107, 168, 0.15);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-pink) !important;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: var(--black) !important;
+            font-weight: 500;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--dark-pink);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+
+        .page-header {
+            background-image: url(https://i.pinimg.com/originals/57/1b/bc/571bbc339b669ced49ab8a51658fc64f.gif);
+            background-size: cover;
+            background-position: center;
+            
+            background-repeat:no-repeat;
+            padding: 100px 0 80px;
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            height: 500px;
+            
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            color: black;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInDown 0.8s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            color: black;
+            font-size: 1.3rem;
+            animation: fadeIn 1s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        
+        .contact-section {
+            padding: 0 0 80px;
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(255, 107, 168, 0.2);
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease;
+            transition: all 0.4s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(255, 107, 168, 0.3);
+        }
+
+        .info-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--white);
+            animation: pulse 2s infinite;
+        }
+
+        .info-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 15px;
+        }
+
+        .info-text {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .contact-form-wrapper {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(255, 107, 168, 0.2);
+            animation: fadeInUp 1s ease;
+        }
+
+        .form-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-pink);
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid var(--soft-pink);
+            border-radius: 15px;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 0 0.25rem rgba(255, 179, 217, 0.25);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
+            border: none;
+            padding: 15px 50px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            color: var(--white);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 5px 20px rgba(255, 107, 168, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 168, 0.4);
+        }
+
+        
+        .store-info {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(255, 107, 168, 0.2);
+            margin-top: 50px;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .store-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-pink);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .address-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 4px solid var(--primary-pink);
+            background: var(--soft-pink);
+            border-radius: 10px;
+        }
+
+        .address-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--dark-pink);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .address-content h6 {
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 5px;
+        }
+
+        .address-content p {
+            color: #666;
+            margin: 0;
+        }
+
+        
+        .map-section {
+            margin-top: 50px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(255, 107, 168, 0.2);
+            animation: fadeIn 1.4s ease;
+        }
+
+        .map-placeholder {
+            background-image: url(https://i.pinimg.com/originals/a5/b3/b0/a5b3b00b226839be5c98d1c081aaea67.gif);
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: var(--white);
+            position: relative;
+        }
+
+        .map-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            right: 15%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .map-placeholder i {
+            font-size: 6rem;
+            margin-bottom: 25px;
+            animation: bounce 2s infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        .map-placeholder h3 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .map-placeholder p {
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+       
+        .footer {
+            background: linear-gradient(135deg, var(--black) 0%, #2a2a2a 100%);
+            color: var(--white);
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-pink);
+        }
+
+        .footer-link {
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-pink);
+            padding-left: 8px;
+            opacity: 1;
+        }
+
+        .social-icon {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            background: var(--primary-pink);
+            color: var(--white);
+            text-align: center;
+            line-height: 45px;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-icon:hover {
+            background: var(--dark-pink);
+            transform: translateY(-5px);
+            color: var(--white);
+        }
+
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2.5rem; }
+            .contact-form-wrapper { padding: 30px; }
+            .store-info { padding: 25px; }
+            .nav-link { margin: 0 10px; }
+        }
+
+
+
+
+
+
+
+@media (max-width: 576px) {
+    .page-header {
+        padding: 60px 0 40px;
+        height: 350px;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .page-header p {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .contact-form-wrapper {
+        padding: 20px;
+    }
+
+    .info-card {
+        padding: 25px;
+    }
+
+    .store-info {
+        padding: 15px;
+    }
+
+}
+
+
+
+
+.footer {
+    text-align: center; 
+}
+
+.footer .row {
+    justify-content: center; 
+}
+
+.footer .col-md-4 {
+    margin-bottom: 30px; 
+}
+
+.footer .social-icon {
+    margin: 0 5px; 
+}
+
+
+        
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-gem"></i>  Fashion
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./product.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./contect.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="page-header ">
+        <div class="container">
+            <h1><i class="fas fa-envelope-open-text"></i> Get in Touch</h1>
+            <p>We'd love to hear from you</p>
+        </div>
+    </section>
+
+    
+    <section class="contact-section">
+        <div class="container">
+          
+            <div class="row mb-5">
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h5 class="info-title">Visit Our Store</h5>
+                        <p class="info-text">123 Fashion Avenue<br>Pakistan<br>Sukkur</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h5 class="info-title">Call Us</h5>
+                        <p class="info-text">Phone: +92(311)3762838<br>Toll Free:FASHION<br>Mon-Sat: 9AM - 8PM</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h5 class="info-title">Email Us</h5>
+                        <p class="info-text">info@fahadahmed.dev.com<br>24 hours <br> Support Available</p>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="contact-form-wrapper">
+                        <h2 class="form-title">Send Us a Message</h2>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName" class="form-label">First Name *</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName" class="form-label">Last Name *</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" placeholder="your.email@example.com" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" placeholder="+92-----------">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject *</label>
+                                <select class="form-select" id="subject" required>
+                                    <option value="">Choose a subject...</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="order">Order Status</option>
+                                    <option value="product">Product Question</option>
+                                    <option value="complaint">Complaint</option>
+                                    <option value="feedback">Feedback</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="form-label">Your Message *</label>
+                                <textarea class="form-control" id="message" rows="6" placeholder="Tell us how we can help you..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-paper-plane me-2"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="store-info">
+                        <h3 class="store-title">Store Information</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="address-item">
+                                    <div class="address-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="address-content">
+                                        <h6>Main Address</h6>
+                                        <p>Mission, Road<br>Pakistan,<br>Sukkur</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="address-item">
+                                    <div class="address-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="address-content">
+                                        <h6>Store Hours</h6>
+                                        <p>Monday - Friday: 10:00 AM - 8:00 PM<br>Saturday: 10:00 AM - 9:00 PM<br>Sunday: 11:00 AM - 6:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="address-item">
+                                    <div class="address-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div class="address-content">
+                                        <h6>Contact Numbers</h6>
+                                        <p>Main: +92 3113762838<br>Customer Service: +92 3113762838<br>Toll Free:FASHION</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="address-item">
+                                    <div class="address-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="address-content">
+                                        <h6>Email Addresses</h6>
+                                        <p>General: info@fahadahmed.dev.com<br>Support: support@fahadahmed.dev.com<br>Sales: sales@fashion.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="map-section">
+                        <div class="map-placeholder">
+                            
+                            <h3>Thank you</h3>
+                            <p>Fashion Avenue, Pakistan, Sukkur</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ 
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">About Elegant Fashion</h5>
+                    <p style="opacity: 0.9;">Your destination for timeless elegance and modern style. We curate the finest collection of women's fashion from around the world.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <a href="./home.html" class="footer-link">Home</a>
+                    <a href="./product.html" class="footer-link">Products</a>
+                    <a href="./contect.html" class="footer-link">Contact</a>
+                    
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Follow Us</h5>
+                    <div class="mb-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                    <p style="opacity: 0.9;">Stay updated with our latest collections and exclusive offers!</p>
+                </div>
+            </div>
+            <hr style="border-color: rgba(255, 255, 255, 0.1); margin: 30px 0;">
+            <div class="text-center">
+                <p style="opacity: 0.8;">&copy; 2025 Elegant Fashion. All rights reserved.Fahad Ahmed</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

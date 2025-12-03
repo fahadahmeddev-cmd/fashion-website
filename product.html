@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-pink: #ffb3d9;
+            --soft-pink: #ffe5f0;
+            --dark-pink: #ff6ba8;
+            --black: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--black);
+            background: var(--soft-pink);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--white) 0%, var(--soft-pink) 100%);
+            box-shadow: 0 2px 15px rgba(255, 107, 168, 0.15);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-pink) !important;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: var(--black) !important;
+            font-weight: 500;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--dark-pink);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        
+        .page-header {
+            background:#ff6ba8;
+            padding: 100px 0 80px;
+
+            background-size: cover;
+            
+            background-repeat: no-repeat;
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInDown 0.8s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            animation: fadeIn 1s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        
+        .products-section {
+            padding: 0 0 80px;
+        }
+
+        .product-card {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            background: var(--white);
+            margin-bottom: 30px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-20px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(255, 107, 168, 0.4);
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 350px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.15) rotate(3deg);
+        }
+
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent 0%, rgba(255, 107, 168, 0.85) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .view-details-btn {
+            background: var(--white);
+            color: var(--dark-pink);
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            transform: translateY(30px);
+            transition: all 0.4s ease;
+            font-size: 1rem;
+        }
+
+        .product-card:hover .view-details-btn {
+            transform: translateY(0);
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--white);
+            color: var(--dark-pink);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            color: var(--primary-pink);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 0.8rem;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 2px solid var(--soft-pink);
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            color: var(--dark-pink);
+            font-weight: 700;
+        }
+
+        .btn-add-cart {
+            background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
+            color: var(--white);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-add-cart:hover {
+            transform: scale(1.08);
+            box-shadow: 0 5px 20px rgba(255, 107, 168, 0.4);
+        }
+
+       
+        .footer {
+            background: linear-gradient(135deg, var(--black) 0%, #2a2a2a 100%);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-pink);
+        }
+
+        .footer-link {
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-pink);
+            padding-left: 8px;
+            opacity: 1;
+        }
+
+        .social-icon {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            background: var(--primary-pink);
+            color: var(--white);
+            text-align: center;
+            line-height: 45px;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-icon:hover {
+            background: var(--dark-pink);
+            transform: translateY(-5px);
+            color: var(--white);
+        }
+
+
+        .pic{
+
+        }
+
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2.5rem; }
+            .product-image-wrapper { height: 250px; }
+            .nav-link { margin: 0 10px; }
+        }
+
+
+
+        .adjust{
+            margin: 30px; border-radius: 20px;
+            opacity: 0;
+            animation: animated 2s ease forwards;
+        }
+
+
+
+
+
+
+
+@keyframes animated{
+
+0%{
+    transform: translateY(40px);opacity: 0;
+}
+
+
+100%{
+    transform: translateY(0px);opacity: 1;
+}
+
+}
+
+@media (max-width: 991px) {
+
+
+.nav-link {
+    text-align: center;
+    padding: 10px 0;
+    margin: 5px 0;
+}
+
+
+.page-header h1 {
+    font-size: 3rem;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+}
+
+
+.product-image-wrapper {
+    height: 300px;
+}
+
+
+.product-card {
+    margin-bottom: 25px;
+}
+
+
+.carousel-item img {
+    height: 450px !important;
+    object-fit: cover;
+}
+}
+
+
+@media (max-width: 768px) {
+
+.page-header {
+    padding: 60px 0;
+}
+
+.page-header h1 {
+    font-size: 2.3rem;
+}
+
+.page-header p {
+    font-size: 1rem;
+}
+
+
+.carousel-item img {
+    height: 350px !important;
+    object-fit: cover;
+}
+
+.adjust {
+    margin: 15px;
+}
+
+.product-image-wrapper {
+    height: 220px;
+}
+
+.product-title {
+    font-size: 1.2rem;
+}
+
+.product-price {
+    font-size: 1.4rem;
+}
+
+}
+
+
+@media (max-width: 576px) {
+
+
+.navbar-brand {
+    font-size: 1.4rem;
+}
+
+
+.page-header h1 {
+    font-size: 1.8rem;
+}
+
+.page-header p {
+    font-size: 0.9rem;
+}
+
+
+.carousel-item img {
+    height: 250px !important;
+}
+
+
+.product-image-wrapper {
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.product-card {
+    margin-bottom: 20px;
+    border-radius: 15px;
+}
+
+
+.btn-add-cart, .view-details-btn {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+}
+}
+
+
+
+
+
+
+
+
+
+
+.footer {
+    text-align: center !important;
+}
+
+.footer .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer p {
+    text-align: center;
+    margin: 5px 0;
+}
+
+.footer .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.footer .social-links a {
+    display: inline-block;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+   
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-gem"></i> Fashion
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./product.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./contect.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-shopping-bag"></i> Our Collections</h1>
+            <p>Discover styles that define you</p>
+        </div>
+    </section>
+
+
+<section class="adjust">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner pic">
+          <div class="carousel-item active ">
+            <img src="./young-woman-smiles-covers-her-mouth-while-shopping-lady-beret-poses-near-stand-with-fancy-dresses.jpg" class="d-block w-100" alt="..." height="600px " width="1150px">
+            
+          </div>
+          <div class="carousel-item">
+            <img src="./5647993.jpg" class="d-block w-100" alt="..." height="600px " width="1150px">
+            <div class="carousel-caption d-none d-md-block">
+             
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./front-view-young-female-holding-red-sale-board-brown-wall.jpg" class="d-block w-100" alt="..."  height="600px " width="1150px">
+            <div class="carousel-caption d-none d-md-block">
+
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<div>
+    <h2 style="font-weight: BOLDER; color: black; text-align: center;"> <i class="fas fa-gem"></i> ALL PRODUCTS</h2>
+   
+</div>
+
+
+<br>
+
+
+
+
+    
+
+    
+    <section class="products-section">
+        <div class="container">
+            <div class="row">
+              
+                <div class="col-lg-4 col-md-6">
+                    <div class="card product-card">
+                        <div class="product-image-wrapper">
+                            <span class="category-badge">New Arrival</span>
+                            <div class="product-image" style="background-image: url(https://www.junaidjamshed.com/media/catalog/product/2/5/25-916_2_.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=755&width=589&canvas=589:755); display: flex; align-items: center; justify-content: center;">
+                              
+                            </div>
+                            <div class="product-overlay">
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="product-category">Dresses</div>
+                            <h5 class="product-title">Elegant Summer Dress</h5>
+                            <p class="product-description">Flowy chiffon design perfect for any occasion</p>
+                            <div class="product-footer">
+                                <span class="product-price">$89.99</span>
+                                <button class="btn-add-cart"><i class="fas fa-cart-plus me-2"></i>Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card product-card">
+                        <div class="product-image-wrapper">
+                            <span class="category-badge">Best Seller</span>
+                            <div class="product-image" style="background-image: url(https://i.pinimg.com/736x/dd/2e/a7/dd2ea7181f0ae0b1461099f8eec4bcd7.jpg) ;">
+                                
+                            </div>
+                            <div class="product-overlay">
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="product-category">Handbags</div>
+                            <h5 class="product-title">Designer Leather Handbag</h5>
+                            <p class="product-description">Premium leather with elegant craftsmanship</p>
+                            <div class="product-footer">
+                                <span class="product-price">$129.99</span>
+                                <button class="btn-add-cart"><i class="fas fa-cart-plus me-2"></i>Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card product-card">
+                        <div class="product-image-wrapper">
+                            <span class="category-badge">Trending</span>
+                            <div class="product-image" style="background-image: url(https://i.pinimg.com/1200x/0b/cb/13/0bcb13ae9a227f229a291d301129ba62.jpg);">
+                               
+                            </div>
+                            <div class="product-overlay">
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="product-category">Shoes</div>
+                            <h5 class="product-title">Premium Heels</h5>
+                            <p class="product-description">Comfortable luxury for all-day elegance</p>
+                            <div class="product-footer">
+                                <span class="product-price">$99.99</span>
+                                <button class="btn-add-cart"><i class="fas fa-cart-plus me-2"></i>Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card product-card">
+                        <div class="product-image-wrapper">
+                            <div class="product-image" style="background-image: url(https://i.pinimg.com/736x/45/82/6c/45826ca0d7bc4d41814a01a36617e0cb.jpg); display: flex; align-items: center; justify-content: center;">
+                               
+                            </div>
+                            <div class="product-overlay">
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="product-category">Tops</div>
+                            <h5 class="product-title">Silk Blouse</h5>
+                            <p class="product-description">Luxurious silk with sophisticated design</p>
+                            <div class="product-footer">
+                                <span class="product-price">$79.99</span>
+                                <button class="btn-add-cart"><i class="fas fa-cart-plus me-2"></i>Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card product-card">
+                        <div class="product-image-wrapper">
+                            <span class="category-badge">Premium</span>
+                            <div class="product-image" style="background-image: url(https://i.pinimg.com/736x/5f/49/c1/5f49c147d13cd2f1e62c7e7d470c89a6.jpg); display: flex; align-items: center; justify-content: center;">
+                               
+                            </div>
+                            <div class="product-overlay">
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="product-category">Outerwear</div>
+                            <h5 class="product-title">Classic Trench Coat</h5>
+                            <p class="product-description">Timeless style with modern comfort</p>
+                            <div class="product-footer">
+                                <span class="product-price">$159.99</span>
+                                <button class="btn-add-cart"><i class="fas fa-cart-plus me-2"></i>Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               
+                <div class="col-lg-4 col-md-6">
+                    <div class="card product-card">
+                        <div class="product-image-wrapper">
+                            <div class="product-image" style="background-image: url(https://i.pinimg.com/736x/6a/60/c7/6a60c7685e5cd86298b221f4807da3b2.jpg); display: flex; align-items: center; justify-content: center;">
+                             
+                            </div>
+                            <div class="product-overlay">
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="product-category">Accessories</div>
+                            <h5 class="product-title">Luxury Scarf</h5>
+                            <p class="product-description">Soft cashmere blend in beautiful colors</p>
+                            <div class="product-footer">
+                                <span class="product-price">$49.99</span>
+                                <button class="btn-add-cart"><i class="fas fa-cart-plus me-2"></i>Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               
+                <div class="col-lg-4 col-md-6">
+                    <div class="card product-card">
+                        <div class="product-image-wrapper">
+                            <span class="category-badge">Hot Deal</span>
+                            <div class="product-image" style="background-image: url(https://i.pinimg.com/1200x/ef/32/c1/ef32c1bf41348bbafaeb584ec84007bc.jpg); display: flex; align-items: center; justify-content: center;">
+                                
+                            </div>
+                            <div class="product-overlay">
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="product-category">Shoes</div>
+                            <h5 class="product-title">Elegant Flats</h5>
+                            <p class="product-description">Perfect balance of style and comfort</p>
+                            <div class="product-footer">
+                                <span class="product-price">$69.99</span>
+                                <button class="btn-add-cart"><i class="fas fa-cart-plus me-2"></i>Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card product-card">
+                        <div class="product-image-wrapper">
+                            <div class="product-image" style="background-image: url(https://i.pinimg.com/736x/29/1a/28/291a28fb4188f61171ffdbd0758d7e17.jpg); display: flex; align-items: center; justify-content: center;">
+                            
+                            </div>
+                            <div class="product-overlay">
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="product-category">Jewelry</div>
+                            <h5 class="product-title">Statement Necklace</h5>
+                            <p class="product-description">Elegant design with crystal accents</p>
+                            <div class="product-footer">
+                                <span class="product-price">$39.99</span>
+                                <button class="btn-add-cart"><i class="fas fa-cart-plus me-2"></i>Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               
+                <div class="col-lg-4 col-md-6">
+                    <div class="card product-card">
+                        <div class="product-image-wrapper">
+                            <span class="category-badge">Limited</span>
+                            <div class="product-image" style="background-image: url(https://i.pinimg.com/736x/e0/7c/a5/e07ca523aa1cfb42f5a18f972eff74bc.jpg); display: flex; align-items: center; justify-content: center;">
+                                
+                            </div>
+                            <div class="product-overlay">
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="product-category">Dresses</div>
+                            <h5 class="product-title">Evening Gown</h5>
+                            <p class="product-description">Stunning elegance for special occasions</p>
+                            <div class="product-footer">
+                                <span class="product-price">$199.99</span>
+                                <button class="btn-add-cart"><i class="fas fa-cart-plus me-2"></i>Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">About Elegant Fashion</h5>
+                    <p style="opacity: 0.9;">Your destination for timeless elegance and modern style. We curate the finest collection of women's fashion from around the world.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <a href="./home.html" class="footer-link">Home</a>
+                    <a href="./product.html" class="footer-link">Products</a>
+                    <a href="./contect.html" class="footer-link">Contact</a>
+                    
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Follow Us</h5>
+                    <div class="mb-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                    <p style="opacity: 0.9;">Stay updated with our latest collections and exclusive offers!</p>
+                </div>
+            </div>
+            <hr style="border-color: rgba(255, 255, 255, 0.1); margin: 30px 0;">
+            <div class="text-center">
+                <p style="opacity: 0.8;">&copy; 2025 Elegant Fashion. All rights reserved. Fahad Ahmed</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
